@@ -13,6 +13,11 @@ public class Matrix implements IMatrix {
     }
 
     @Override
+    public double[][] getRawArray() {
+        return rawArray;
+    }
+
+    @Override
     public int getRows() {
         return rawArray.length;
     }
@@ -27,22 +32,58 @@ public class Matrix implements IMatrix {
 
     @Override
     public IMatrix times(IMatrix matrix) {
-        throw new NotImplementedError(); // TODO:
+        double[][] out = new double[getRows()][matrix.getColumns()];
+
+        if (getColumns() == matrix.getRows()) {
+            for (int y = 0;y < matrix.getColumns();y++){
+                for (int x = 0;x < getRows();x++){
+                    for (int i = 0;i < getColumns();i++){
+                        out[y][x] += get(i,y) * matrix.get(x,i);
+                    }
+                }
+            }
+
+            return new Matrix(out);
+
+        } else {
+            System.out.println("hej hej probléme máš tady strážníka");
+            throw new UnsupportedOperationException();
+        }
     }
 
     @Override
-    public IMatrix times(Number scalar) {
-        throw new NotImplementedError(); // TODO:
+    public IMatrix times(double scalar) {
+
+        for (int x = 0;x < getColumns();x++){
+            for (int y = 0;y < getRows();y++){
+                rawArray[y][x] *= scalar;
+            }
+        }
+
+        return this;
     }
 
     @Override
     public IMatrix add(IMatrix matrix) {
-        throw new NotImplementedError(); // TODO:
+
+        if (getRows() == matrix.getRows() && getColumns() == matrix.getColumns()){
+
+            for (int x = 0;x < getColumns();x++){
+                for (int y = 0;y < getRows();y++){
+                    rawArray[y][x] += matrix.get(x,y);
+                }
+            }
+
+            return this;
+        }else{
+            throw new UnsupportedOperationException();
+        }
+
     }
 
     @Override
     public double get(int n, int m) {
-        throw new NotImplementedError(); // TODO:
+        return rawArray[m][n];
     }
 
     //region Optional

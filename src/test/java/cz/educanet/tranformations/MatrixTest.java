@@ -1,5 +1,6 @@
 package cz.educanet.tranformations;
 
+import jdk.swing.interop.DragSourceContextWrapper;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -63,18 +64,52 @@ public class MatrixTest {
 
     @Test
     public void times() {
+        double[][] test ={
+                {1, 1, 1},
+                {1, 1, 1},
+                {0, 0, 0},
+        };
+
+        assertArrayEquals(test,b.times(c).getRawArray());
     }
 
     @Test
     public void timesScalar() {
+        assertArrayEquals(a.getRawArray(),a.times(1.0).getRawArray());
+
+        double[][] testB = {
+                {2, 2, 2},
+                {2, 2, 2},
+                {0, 0, 0},
+        };
+
+        assertArrayEquals(testB,b.times(2.0).getRawArray());
+
+        double[][] testC = {
+                {2.5, 0, 0},
+                {0, 2.5, 0},
+                {0, 0, 2.5},
+        };
+
+        assertArrayEquals(testC,c.times(2.5).getRawArray());
     }
 
     @Test
     public void add() {
+        double[][] test = {
+                {2, 1, 1},
+                {1, 2, 1},
+                {0, 0, 1},
+        };
+        assertArrayEquals(test,b.add(c).getRawArray());
+
     }
 
     @Test
     public void get() {
+        assertEquals(1.0,a.get(1,1),0);
+        assertEquals(0,b.get(0,2),0);
+        assertEquals(0,b.get(1,2),0);
     }
 
     @Test

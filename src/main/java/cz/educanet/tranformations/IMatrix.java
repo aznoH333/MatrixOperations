@@ -14,7 +14,7 @@ public interface IMatrix {
      * @param scalar
      * @return Scalar times "larger" matrix
      */
-    IMatrix times(Number scalar);
+    IMatrix times(double scalar);
 
     /**
      * Adds two matrices
@@ -52,5 +52,7 @@ public interface IMatrix {
      * @return the value of the "cell"
      */
     double get(int n, int m);
+
+    double[][] getRawArray();
 
 }
